@@ -12,9 +12,9 @@ export class TasksController{
     }
 
     @Post()
-    async createTask(@Body() body: {title: string} ){
-        await this.service.create(body.title)
-        return {message: 'Tarefa Criada Com Sucesso'}
+    async createTask(@Body() body: {title: string}){
+        const task = await this.service.create(body.title)
+        return task
     }
 
     @Delete(':id')
@@ -25,7 +25,7 @@ export class TasksController{
 
     @Patch(':id/done')
     async changeTaks(@Param('id') id:string){
-        await this.service.changeTask(id)
-        return {message: 'Tarefa Concluida'}
+        const taskUpdated = await this.service.changeTask(id)
+        return taskUpdated
     }
 }
